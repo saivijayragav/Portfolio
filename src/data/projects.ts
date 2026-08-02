@@ -24,6 +24,9 @@ export type Project = {
   tech?: string[];
   links?: { label: string; url: string }[];
   status?: ProjectStatus;
+  image?: string;
+  imageAlt?: string;
+  screenshots?: { src: string; alt: string; caption?: string }[];
   overview?: string;
   problem?: string;
   solution?: string;
@@ -48,6 +51,8 @@ export const featuredProjects: Project[] = [
     slug: "binarysync",
     github: "https://github.com/saivijayragav/binarysync",
     status: "Active Development",
+    image: "/images/binarysync.png",
+    imageAlt: "BinarySync delta-sync architecture",
     context:
       "Working with large binary datasets during my ML internships, I experienced firsthand how painful it was to version and sync multi-gigabyte files. Existing tools either re-uploaded everything or used fixed-size chunking that broke on the smallest edit.",
     approach:
@@ -102,6 +107,15 @@ export const featuredProjects: Project[] = [
     slug: "neuroscreen",
     github: "https://github.com/saivijayragav/Neuroscreen",
     status: "Active Development",
+    image: "/images/neuroscreenhero.png",
+    imageAlt: "NeuroScreen screening platform",
+    screenshots: [
+      {
+        src: "/images/neuroscreenimage.png",
+        alt: "NeuroScreen screening platform interface",
+        caption: "The screening dashboard where questionnaires and motion analysis come together.",
+      },
+    ],
     context:
       "Access to autism screening specialists often involves months of waiting. I wanted to build a tool that could provide immediate, data-driven screening support while keeping the clinician in the loop.",
     approach:
@@ -155,6 +169,8 @@ export const featuredProjects: Project[] = [
     slug: "ai-service-orchestrator",
     github: "https://github.com/saivijayragav/AI-Service-Orchestrator",
     status: "Active Development",
+    image: "/images/aiso.png",
+    imageAlt: "AI Service Orchestrator workflow engine",
     context:
       "Orchestrating multiple AI services by hand means writing glue code that retries, branches, and sequences calls. I wanted a control plane that made those patterns declarative.",
     approach:
@@ -208,6 +224,15 @@ export const featuredProjects: Project[] = [
     slug: "printing-shop",
     github: "https://github.com/saivijayragav/Printout-Shop-Automation",
     status: "MVP",
+    image: "/images/printinshopautomation.png",
+    imageAlt: "Printing Shop Management platform",
+    screenshots: [
+      {
+        src: "/images/PrintingShopHomepage.jpeg",
+        alt: "Printing Shop Management mobile app",
+        caption: "The mobile app lets students upload documents, configure print settings, and track orders.",
+      },
+    ],
     context:
       "The campus print shop handled hundreds of orders daily through a manual workflow — students emailed files, waited for confirmation, and had no visibility into order status. The process was slow and error-prone.",
     approach:
@@ -262,6 +287,15 @@ export const featuredProjects: Project[] = [
     slug: "eva",
     github: "https://github.com/saivijayragav/Evidence-Verification-System",
     status: "Prototype",
+    image: "/images/evidenceverificationagent.png",
+    imageAlt: "Evidence Verification Agent platform",
+    screenshots: [
+      {
+        src: "/images/EvidenceVerificationAgent.png",
+        alt: "Evidence Verification Agent platform interface",
+        caption: "The platform surfaces authenticity signals for both video and news content.",
+      },
+    ],
     context:
       "Misinformation moves faster than manual fact-checking. I wanted to explore whether a single pipeline could surface authenticity signals across both video and news text before a claim spreads.",
     approach:
@@ -313,7 +347,7 @@ export type ArchiveProject = {
   stars?: number;
 };
 
-export const advancedSupportingProjects: ArchiveProject[] = [
+export const otherProjects: ArchiveProject[] = [
   {
     title: "QueryPilot",
     description:
@@ -345,9 +379,6 @@ export const advancedSupportingProjects: ArchiveProject[] = [
     categories: ["AI & Machine Learning", "Developer Tools"],
     github: "https://github.com/saivijayragav/AI-Coding-Agent-CLI",
   },
-];
-
-export const supportingProjects: ArchiveProject[] = [
   {
     title: "AI ATC Assistant",
     description:
@@ -389,36 +420,12 @@ export const supportingProjects: ArchiveProject[] = [
     github: "https://github.com/saivijayragav/AI-Vs-Human-Text",
   },
   {
-    title: "Autism Predictor",
-    description:
-      "Machine learning model for early autism prediction based on behavioral attributes and developmental indicators.",
-    tags: ["Python", "ML", "Healthcare"],
-    categories: ["AI & Machine Learning"],
-    github: "https://github.com/saivijayragav/Autism_Predictor",
-  },
-  {
     title: "Harry Potter X Bot",
     description:
       "An X (Twitter) bot that posts three lines from Harry Potter books every 30 minutes, bringing literary magic to social feeds.",
     tags: ["Python", "Twitter API", "Automation"],
     categories: ["Automation", "Developer Tools"],
     github: "https://github.com/saivijayragav/harrypotter-x-bot",
-  },
-  {
-    title: "Sudoku — Backtracking Solver",
-    description:
-      "Interactive Sudoku solver visualization that demonstrates the backtracking algorithm step by step, deployed on GitHub Pages.",
-    tags: ["HTML", "CSS", "Algorithms"],
-    categories: ["Developer Tools"],
-    github: "https://github.com/saivijayragav/Sudoku-Solving-using-Backtracking",
-  },
-  {
-    title: "Typetest",
-    description:
-      "Typing speed test application with real-time WPM tracking, accuracy metrics, and customizable test durations.",
-    tags: ["JavaScript", "UX", "Tool"],
-    categories: ["Developer Tools"],
-    github: "https://github.com/saivijayragav/typetest",
   },
   {
     title: "Job Sniper",

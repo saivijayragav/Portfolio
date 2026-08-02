@@ -1,9 +1,9 @@
 import { Container } from "@/components/ui/container";
 import { Tag } from "@/components/ui/tag";
 import { ArchitectureDiagram } from "./architecture-diagrams";
+import { ProjectVisual, heroSizes } from "./project-visuals";
 import {
-  advancedSupportingProjects,
-  supportingProjects,
+  otherProjects,
   featuredProjects,
   type Project,
 } from "@/data/projects";
@@ -22,10 +22,7 @@ const slugify = (title: string) =>
   title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 const archiveGithub = new Map<string, string | undefined>(
-  [...advancedSupportingProjects, ...supportingProjects].map((p) => [
-    slugify(p.title),
-    p.github,
-  ])
+  otherProjects.map((p) => [slugify(p.title), p.github])
 );
 
 const statusTone: Record<string, string> = {
@@ -113,6 +110,32 @@ export function CaseStudyLayout({ project }: { project: Project }) {
           </div>
         </div>
 
+        <div className="mb-16">
+          {project.image ? (
+            <div className="mx-auto w-full max-w-2xl overflow-hidden rounded-xl border border-black/80 bg-white">
+              <img
+                src={project.image}
+                alt={project.imageAlt || project.title}
+                width={
+                  project.slug && heroSizes[project.slug]
+                    ? heroSizes[project.slug].width
+                    : undefined
+                }
+                height={
+                  project.slug && heroSizes[project.slug]
+                    ? heroSizes[project.slug].height
+                    : undefined
+                }
+                className="h-auto w-full"
+              />
+            </div>
+          ) : project.slug ? (
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-xl border border-border bg-muted">
+              <ProjectVisual slug={project.slug} />
+            </div>
+          ) : null}
+        </div>
+
         <div className="divider mb-16" />
 
         <div className="mx-auto max-w-3xl space-y-16">
@@ -120,6 +143,31 @@ export function CaseStudyLayout({ project }: { project: Project }) {
             <section>
               <SectionTitle>Overview</SectionTitle>
               <Prose>{project.overview}</Prose>
+            </section>
+          )}
+
+          {project.screenshots && project.screenshots.length > 0 && (
+            <section>
+              <SectionTitle>Screenshots</SectionTitle>
+              <div className="space-y-6">
+                {project.screenshots.map((shot) => (
+                  <figure
+                    key={shot.src}
+                    className="overflow-hidden rounded-xl border border-border bg-muted"
+                  >
+                    <img
+                      src={shot.src}
+                      alt={shot.alt}
+                      className="h-auto w-full"
+                    />
+                    {shot.caption && (
+                      <figcaption className="border-t border-border px-4 py-3 text-sm text-text-secondary">
+                        {shot.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
             </section>
           )}
 

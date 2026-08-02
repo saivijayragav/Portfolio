@@ -5,6 +5,7 @@ import { Container } from "../ui/container";
 import { Section } from "../ui/section";
 import { Tag } from "../ui/tag";
 import { TextReveal } from "../ui/text-reveal";
+import { ProjectVisual, heroSizes } from "../case-study/project-visuals";
 import { featuredProjects } from "@/data/projects";
 
 const patternClasses = ["pattern-dots", "pattern-lines", "pattern-grid"];
@@ -32,23 +33,39 @@ export function FeaturedProjects() {
               className="group relative grid gap-8 md:grid-cols-2 md:gap-16"
             >
               <div
-                className={`${i % 2 === 1 ? "md:order-2" : ""} relative overflow-hidden rounded-lg bg-muted`}
+                className={`${i % 2 === 1 ? "md:order-2" : ""} relative self-start overflow-hidden rounded-lg bg-muted`}
               >
                 <a href={project.slug ? `/projects/${project.slug}` : "#"}>
-                  <div
-                    className={`aspect-[4/3] w-full ${patternClasses[i % patternClasses.length]} transition-transform duration-500 group-hover:scale-[1.02]`}
-                  >
-                    <div className="flex h-full items-center justify-center">
-                      <span className="select-none font-mono text-5xl font-medium tracking-tight text-text-tertiary/30 md:text-7xl">
-                        {project.title[0]}
-                      </span>
+                  {project.image ? (
+                    <div className="relative w-full overflow-hidden rounded-lg border border-black/80 bg-white">
+                      <img
+                        src={project.image}
+                        alt={project.imageAlt || project.title}
+                        width={
+                          project.slug && heroSizes[project.slug]
+                            ? heroSizes[project.slug].width
+                            : undefined
+                        }
+                        height={
+                          project.slug && heroSizes[project.slug]
+                            ? heroSizes[project.slug].height
+                            : undefined
+                        }
+                        className="block h-auto w-full transition-transform duration-500 group-hover:scale-[1.02]"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-accent/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <span className="text-sm font-medium text-white dark:text-black">
+                          View Project &rarr;
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center bg-accent/70 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <span className="text-sm font-medium text-white dark:text-black">
-                      View Project &rarr;
-                    </span>
-                  </div>
+                  ) : (
+                    <div
+                      className={`aspect-[4/3] w-full ${patternClasses[i % patternClasses.length]} transition-transform duration-500 group-hover:scale-[1.02]`}
+                    >
+                      {project.slug && <ProjectVisual slug={project.slug} />}
+                    </div>
+                  )}
                 </a>
               </div>
 

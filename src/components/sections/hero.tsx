@@ -105,6 +105,17 @@ export function Hero() {
                 LeetCode
               </a>
             </motion.div>
+
+            <motion.a
+              href="/Sai_Vijay_Ragav_RESUME.pdf"
+              download
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-text-primary bg-text-primary px-5 py-2.5 text-sm font-medium text-bg transition-colors duration-200 hover:border-text-secondary hover:bg-text-secondary"
+            >
+              Download Resume &darr;
+            </motion.a>
           </div>
 
           <motion.div

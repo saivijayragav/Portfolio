@@ -7,8 +7,7 @@ import { Section } from "../ui/section";
 import { TextReveal } from "../ui/text-reveal";
 import { Tag } from "../ui/tag";
 import {
-  advancedSupportingProjects,
-  supportingProjects,
+  otherProjects,
   type ArchiveProject,
   type ProjectCategory,
 } from "@/data/projects";
@@ -18,17 +17,14 @@ const filters: ("All" | ProjectCategory)[] = [
   "AI & Machine Learning",
   "Backend & Infrastructure",
   "Developer Tools",
-  "Full-Stack",
   "Automation",
 ];
 
-function ProjectCard({ project, large = false }: { project: ArchiveProject; large?: boolean }) {
+function ProjectCard({ project }: { project: ArchiveProject }) {
   return (
-    <div
-      className={`group flex w-full flex-col rounded-lg border border-border p-5 transition-colors duration-200 hover:border-text-tertiary ${large ? "min-h-[180px]" : ""}`}
-    >
+    <div className="group flex w-full flex-col rounded-lg border border-border p-5 transition-colors duration-200 hover:border-text-tertiary">
       <div className="mb-2 flex items-start justify-between gap-2">
-        <h3 className={`font-medium ${large ? "text-base" : "text-sm"}`}>
+        <h3 className="text-sm font-medium">
           {project.github ? (
             <a
               href={project.github}
@@ -63,12 +59,8 @@ function ProjectCard({ project, large = false }: { project: ArchiveProject; larg
 export function ProjectArchive() {
   const [active, setActive] = useState<"All" | ProjectCategory>("All");
 
-  const filterProjects = (list: ArchiveProject[]) =>
-    active === "All" ? list : list.filter((p) => p.categories.includes(active));
-
-  const advanced = filterProjects(advancedSupportingProjects);
-  const supporting = filterProjects(supportingProjects);
-  const total = advanced.length + supporting.length;
+  const projects =
+    active === "All" ? otherProjects : otherProjects.filter((p) => p.categories.includes(active));
 
   return (
     <Section id="archive">
@@ -96,57 +88,24 @@ export function ProjectArchive() {
           ))}
         </div>
 
-        {total === 0 ? (
+        {projects.length === 0 ? (
           <p className="text-sm text-text-tertiary">No projects in this category.</p>
         ) : (
-          <div className="space-y-12">
-            {advanced.length > 0 && (
-              <div>
-                <p className="mb-4 font-mono text-xs uppercase tracking-wide text-text-tertiary">
-                  Featured
-                </p>
-                <div className="grid gap-4 md:grid-cols-2">
-                  <AnimatePresence initial={false} mode="popLayout">
-                    {advanced.map((project) => (
-                      <motion.div
-                        key={project.title}
-                        layout
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.96 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ProjectCard project={project} large />
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
-              </div>
-            )}
-
-            {supporting.length > 0 && (
-              <div>
-                <p className="mb-4 font-mono text-xs uppercase tracking-wide text-text-tertiary">
-                  More Projects
-                </p>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  <AnimatePresence initial={false} mode="popLayout">
-                    {supporting.map((project) => (
-                      <motion.div
-                        key={project.title}
-                        layout
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.96 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ProjectCard project={project} />
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
-              </div>
-            )}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <AnimatePresence initial={false} mode="popLayout">
+              {projects.map((project) => (
+                <motion.div
+                  key={project.title}
+                  layout
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         )}
       </Container>

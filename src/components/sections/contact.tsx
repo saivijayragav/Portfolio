@@ -78,6 +78,17 @@ export function Contact() {
                     {profile.phone}
                   </a>
                 </div>
+
+                <div>
+                  <p className="mb-1 text-sm text-text-tertiary">Resume</p>
+                  <a
+                    href="/Sai_Vijay_Ragav_RESUME.pdf"
+                    download
+                    className="text-lg font-medium transition-colors duration-200 hover:text-text-secondary"
+                  >
+                    Download Resume &darr;
+                  </a>
+                </div>
               </div>
             </TextReveal>
           </div>

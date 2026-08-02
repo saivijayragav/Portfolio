@@ -9,9 +9,6 @@ export function Footer() {
           <p className="text-sm text-text-tertiary">
             &copy; {new Date().getFullYear()} {profile.name}. All rights reserved.
           </p>
-          <p className="text-sm text-text-tertiary">
-            Designed with intention.
-          </p>
         </div>
       </Container>
     </footer>
