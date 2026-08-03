@@ -291,7 +291,7 @@ export const featuredProjects: Project[] = [
     imageAlt: "Evidence Verification Agent platform",
     screenshots: [
       {
-        src: "/images/EvidenceVerificationAgent.png",
+        src: "/images/EvidenceVerificationAgentScreenshot.png",
         alt: "Evidence Verification Agent platform interface",
         caption: "The platform surfaces authenticity signals for both video and news content.",
       },
